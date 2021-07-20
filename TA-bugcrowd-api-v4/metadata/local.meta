@@ -1,0 +1,24 @@
+[props/source%3A%3A...ta-bugcrowd-api-v4%2A.log%2A]
+owner = admin
+version = 8.2.0
+modtime = 1626326701.927688000
+
+[props/source%3A%3A...ta_bugcrowd_api_v4%2A.log%2A]
+owner = admin
+version = 8.2.0
+modtime = 1626326702.196556000
+
+[indexes/bugcrowd]
+owner = admin
+version = 8.2.0
+modtime = 1626327399.413636000
+
+[collections/TA_bugcrowd_api_v4_checkpointer]
+owner = admin
+version = 8.2.0
+modtime = 1626327439.260020000
+
+[props/bugcrowd]
+owner = admin
+version = 8.2.0
+modtime = 1626327614.461012000
