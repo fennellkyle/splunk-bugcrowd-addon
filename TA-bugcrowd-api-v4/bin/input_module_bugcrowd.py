@@ -69,11 +69,13 @@ def collect_events(helper, ew):
 
         for submission in r_json['data']:
             
-            # Using the last activity id as a checkpoint for submissions. Note that submissions
-            # with more than 100 activities will no longer index as the last id will not
-            # change.In future versions of the API there will be better ways to handle this.
-            latest_activity = submission['relationships']['activities']['data'][-1]['id']
-            state = helper.get_check_point(latest_activity)
+            # Using the submission id with number of activities as the checkpoint. There seems to be no better way to track changes to a submission.
+            # In future versions of the API there will be better ways to handle this.
+            sub_id = submission['id']
+            num_of_activities = str(submission['relationships']['activities']['links']['related']['meta']['total_hits'])
+            check_point = "{}-{}".format(sub_id, num_of_activities)
+
+            state = helper.get_check_point(check_point)
             
             if state is None:
                 # remove unnecessary 'links' 
@@ -85,7 +87,7 @@ def collect_events(helper, ew):
                 submission.pop('links')
                 
                 final_result.append(submission)
-                helper.save_check_point(latest_activity, "Indexed")
+                helper.save_check_point(check_point, "Indexed")
             #helper.delete_check_point(latest_activity)
     
         for included in r_json['included']:
