@@ -2,9 +2,9 @@
     "meta": {
         "name": "TA-bugcrowd-api-v4",
         "displayName": "Bugcrowd API v4",
-        "version": "1.0.0",
-        "apiVersion": "3.0.0",
-        "restRoot": "TA_bugcrowd_api_v4"
+        "version": "1.3.0",
+        "restRoot": "TA_bugcrowd_api_v4",
+        "schemaVersion": "0.0.3"
     },
     "pages": {
         "configuration": {
@@ -147,8 +147,8 @@
                             "defaultValue": "default",
                             "options": {
                                 "endpointUrl": "data/indexes",
-                                "blackList": "^_.*$",
-                                "createSearchChoice": true
+                                "createSearchChoice": true,
+                                "denyList": "^_.*$"
                             },
                             "required": true,
                             "validators": [
