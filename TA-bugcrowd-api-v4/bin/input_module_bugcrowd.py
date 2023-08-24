@@ -104,7 +104,7 @@ def collect_events(helper, ew):
             #helper.delete_check_point(included['id'])
 
         # To create a splunk event
-        event = helper.new_event(json.dumps(final_result), host='api.bugrowd.com', index=helper.get_output_index(), source=helper.get_input_type(), sourcetype=helper.get_sourcetype(), done=True, unbroken=True)
+        event = helper.new_event(json.dumps(final_result), host='api.bugcrowd.com', index=helper.get_output_index(), source=helper.get_input_type(), sourcetype=helper.get_sourcetype(), done=True, unbroken=True)
         ew.write_event(event)
         helper.log_info("Indexed %s submissions" % r_json['meta']['count'])
     
