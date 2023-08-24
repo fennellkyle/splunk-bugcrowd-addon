@@ -44,13 +44,13 @@ def collect_events(helper, ew):
         url = "https://api.bugcrowd.com/submissions"
         # note: offset has max of <10000. verify the max_hits is not more than that.
         param = {
-            'fields[submission]': 'title,duplicate,custom_fields,submitted_at,bug_url,vrt_id,severity,state,last_transitioned_to_not_applicable_at,last_transitioned_to_not_reproducible_at,last_transitioned_to_out_of_scope_at,last_transitioned_to_wont_fix_at,last_transitioned_to_triaged_at,last_transitioned_to_unresolved_at,last_transitioned_to_resolved_at,assignee,researcher,description,activities,program,target,monetary_rewards',
+            'fields[submission]': 'title,duplicate,custom_fields,submitted_at,bug_url,vrt_id,severity,state,last_transitioned_to_not_applicable_at,last_transitioned_to_not_reproducible_at,last_transitioned_to_out_of_scope_at,last_transitioned_to_informational_at,last_transitioned_to_triaged_at,last_transitioned_to_unresolved_at,last_transitioned_to_resolved_at,assignee,researcher,description,activities,program,target,monetary_rewards',
             'include': 'monetary_rewards,researcher,assignee,program,target',
             'fields[program]': 'name',
             'fields[target]': 'name',
             'page[limit]': return_limit,
             'page[offset]': return_offset,
-            'filter[state]': 'unresolved,resolved,wont-fix,new,triaged'}
+            'filter[state]': 'unresolved,resolved,informational,new,triaged'}
         head = {'Authorization': 'Token ' + opt_api_key, 'Accept': 'application/vnd.bugcrowd.v4+json'}
         final_result = []
 
