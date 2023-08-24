@@ -51,7 +51,7 @@ def collect_events(helper, ew):
             'page[limit]': return_limit,
             'page[offset]': return_offset,
             'filter[state]': 'unresolved,resolved,informational,new,triaged'}
-        head = {'Authorization': 'Token ' + opt_api_key, 'Accept': 'application/vnd.bugcrowd.v4+json'}
+        head = {'Authorization': 'Token ' + opt_api_key, 'Accept': 'application/vnd.bugcrowd+json'}
         final_result = []
 
         response = helper.send_http_request(url, 'GET', parameters=param, payload=None,
