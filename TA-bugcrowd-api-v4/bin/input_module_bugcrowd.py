@@ -44,14 +44,14 @@ def collect_events(helper, ew):
         url = "https://api.bugcrowd.com/submissions"
         # note: offset has max of <10000. verify the max_hits is not more than that.
         param = {
-            'fields[submission]': 'title,duplicate,custom_fields,submitted_at,bug_url,vrt_id,severity,state,last_transitioned_to_not_applicable_at,last_transitioned_to_not_reproducible_at,last_transitioned_to_out_of_scope_at,last_transitioned_to_wont_fix_at,last_transitioned_to_triaged_at,last_transitioned_to_unresolved_at,last_transitioned_to_resolved_at,assignee,researcher,description,activities,program,target,monetary_rewards',
+            'fields[submission]': 'title,duplicate,custom_fields,submitted_at,bug_url,vrt_id,severity,state,last_transitioned_to_not_applicable_at,last_transitioned_to_not_reproducible_at,last_transitioned_to_out_of_scope_at,last_transitioned_to_informational_at,last_transitioned_to_triaged_at,last_transitioned_to_unresolved_at,last_transitioned_to_resolved_at,assignee,researcher,description,activities,program,target,monetary_rewards',
             'include': 'monetary_rewards,researcher,assignee,program,target',
             'fields[program]': 'name',
             'fields[target]': 'name',
             'page[limit]': return_limit,
             'page[offset]': return_offset,
-            'filter[state]': 'unresolved,resolved,wont-fix,new,triaged'}
-        head = {'Authorization': 'Token ' + opt_api_key, 'Accept': 'application/vnd.bugcrowd.v4+json'}
+            'filter[state]': 'unresolved,resolved,informational,new,triaged'}
+        head = {'Authorization': 'Token ' + opt_api_key, 'Accept': 'application/vnd.bugcrowd+json'}
         final_result = []
 
         response = helper.send_http_request(url, 'GET', parameters=param, payload=None,
@@ -104,7 +104,7 @@ def collect_events(helper, ew):
             #helper.delete_check_point(included['id'])
 
         # To create a splunk event
-        event = helper.new_event(json.dumps(final_result), host='api.bugrowd.com', index=helper.get_output_index(), source=helper.get_input_type(), sourcetype=helper.get_sourcetype(), done=True, unbroken=True)
+        event = helper.new_event(json.dumps(final_result), host='api.bugcrowd.com', index=helper.get_output_index(), source=helper.get_input_type(), sourcetype=helper.get_sourcetype(), done=True, unbroken=True)
         ew.write_event(event)
         helper.log_info("Indexed %s submissions" % r_json['meta']['count'])
     
